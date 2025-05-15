@@ -67,7 +67,7 @@ if __name__ == "__main__":
 
     prime_users = (user for user in gen_data(75_000) if is_prime(user["id"]))
 
-    #print(f"Total number of prime users {len(prime_users)}")
+    # print(f"Total number of prime users {len(prime_users)}")
 
     # Complex and inefficient scoring logic
     """
