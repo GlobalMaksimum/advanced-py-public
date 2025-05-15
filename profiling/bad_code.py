@@ -1,12 +1,11 @@
 import random
 import time
 import math
-
+from typing import Iterator
 from concurrent.futures import ThreadPoolExecutor
 
 
-def gen_data(n: int = 75_000) -> list[dict]:
-    users = []
+def gen_data(n: int = 75_000) -> Iterator[dict]:
     for i in range(75_000):
         user = {
             "id": i,
@@ -14,9 +13,7 @@ def gen_data(n: int = 75_000) -> list[dict]:
             "score": random.randint(1, 10000),
             "email": f"user{i}@example.com",
         }
-        users.append(user)
-
-    return users
+        yield user
 
 
 def is_prime(n: int) -> bool:
@@ -67,21 +64,10 @@ if __name__ == "__main__":
           - [ ] List comprehension
           - 
     """
-    users = gen_data(75_000)
 
-    """
-        Ideas for optimization
-          - [ ]
-    
-    """
-    prime_users = []
-    for user in users:
-        n = user["id"]
+    prime_users = (user for user in gen_data(75_000) if is_prime(user["id"]))
 
-        if is_prime(n):
-            prime_users.append(user)
-
-    print(f"Total number of prime users {len(prime_users)}")
+    #print(f"Total number of prime users {len(prime_users)}")
 
     # Complex and inefficient scoring logic
     """
